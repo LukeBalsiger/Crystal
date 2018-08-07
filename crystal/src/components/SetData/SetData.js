@@ -20,17 +20,18 @@ export default class SetData extends React.Component {
   componentDidMount() {
     pokemontcgsdk.card.where({setCode: this.state.value})
         .then(result =>  {
-            console.log(result)
-          var listCards = []
-          var listUrls = []
-          for(var i = 0; i < result.length; i++) {
-              listCards.push(result[i].name)
-              listUrls.push(result[i].imageUrl)
-          }
-          this.setState({
-            cardNameList: listCards,
-            urlList: listUrls
-          })
+            var listCards = []
+            var listUrls = []
+            for(var i = 0; i < result.length; i++) {
+                if(result[i].name.length === 0) { result[i].set = 'N/A'}
+                if(result[i].imageUrl.length === 0) { result[i].imageUrl = 'N/A'}
+                listCards.push(result[i].name)
+                listUrls.push(result[i].imageUrl)
+            }
+            this.setState({
+                cardNameList: listCards,
+                urlList: listUrls
+            })
     });
   }
 
@@ -38,19 +39,21 @@ export default class SetData extends React.Component {
     var selectedSet = event.target.value
     var selectedSetTranslated = helper.getSetCode(selectedSet)
     pokemontcgsdk.card.where({setCode: selectedSetTranslated})
-      .then(result =>  {
-        var listCards = []
-          var listUrls = []
-        for(var i = 0; i < result.length; i++) {
-          listCards.push(result[i].name)
-          listUrls.push(result[i].imageUrl)
-        }
-        this.setState({
-          value: selectedSet,
-          cardNameList: listCards,
-          urlList: listUrls
+        .then(result =>  {
+            var listCards = []
+            var listUrls = []
+            for(var i = 0; i < result.length; i++) {
+                if(result[i].name.length === 0) { result[i].set = 'N/A'}
+                if(result[i].imageUrl.length === 0) { result[i].imageUrl = 'N/A'}
+                listCards.push(result[i].name)
+                listUrls.push(result[i].imageUrl)
+            }
+            this.setState({
+                value: selectedSet,
+                cardNameList: listCards,
+                urlList: listUrls
+            })
         })
-      })
   }
 
   render() {

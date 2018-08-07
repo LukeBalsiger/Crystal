@@ -26,6 +26,10 @@ export default class TCGData extends React.Component {
           var listRarity = []
           var listUrl = []
           for(var i = 0; i < result.length; i++) {
+            if(result[i].set.length === 0) { result[i].set = 'N/A'}
+            if(result[i].number.length === 0) { result[i].number = 'N/A'}
+            if(result[i].rarity.length === 0) { result[i].rarity = 'N/A'}
+            if(result[i].imageUrl.length === 0) { result[i].imageUrl = 'N/A'}
               listSet.push(result[i].set)
               listNum.push(result[i].number)
               listRarity.push(result[i].rarity)
@@ -49,6 +53,10 @@ export default class TCGData extends React.Component {
           var listRarity = []
           var listUrl = []
         for(var i = 0; i < result.length; i++) {
+          if(result[i].set.length === 0) { result[i].set = 'N/A'}
+          if(result[i].number.length === 0) { result[i].number = 'N/A'}
+          if(result[i].rarity.length === 0) { result[i].rarity = 'N/A'}
+          if(result[i].imageUrl.length === 0) { result[i].imageUrl = 'N/A'}
           listSet.push(result[i].set)
           listNum.push(result[i].number)
           listRarity.push(result[i].rarity)
