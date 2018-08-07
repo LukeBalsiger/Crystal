@@ -9,7 +9,8 @@ export default class CrystalNavbar extends React.Component {
       <div>
             <ul className="Navbar-ul">
                 <li className="Navbar-li"><a href="/"><img src={logo} className="Nav-logo" alt="logo" /></a></li>
-                <li className="Navbar-li"><a href="/">Next</a></li>
+                <li className="Navbar-li"><a href="/cards">Cards</a></li>
+                <li className="Navbar-li"><a href="/sets">Sets</a></li>
             </ul>
       </div>
     );

@@ -1,0 +1,25 @@
+.SetData-select {
+    background-color: darkslategrey;
+}
+
+.SetData-ul {
+    list-style-type: none;
+}
+
+.SetData-card-list-display {
+    color: black;
+    background-color: dimgray;
+}
+
+.SetData-url-list-display {
+    color: black;
+    background-color: dimgray;
+}
+
+.SetData-form-block {
+    text-align: center;
+    margin-left: 10%;
+    width: 80%;
+    color: black;
+    background-color: darkslategrey;
+}
