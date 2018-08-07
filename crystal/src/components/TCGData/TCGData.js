@@ -77,19 +77,19 @@ export default class TCGData extends React.Component {
     })
 
     var allSetsForSelected = this.state.setList.map((set, index) => {
-      return <a href={urlLinkList[index]} key={urlLinkList[index] + index}><li key={set + index}>{set}</li></a>
+      return <li key={set + index}><a href={urlLinkList[index]} key={urlLinkList[index] + index}>{set}</a></li>
     })
 
     var allNumbersForSelected = this.state.numList.map((num, index) => {
-      return <a href={urlLinkList[index]} key={urlLinkList[index] + index}><li key={num + index}>{num}</li></a>
+      return <li key={num + index}><a href={urlLinkList[index]} key={urlLinkList[index] + index}>{num}</a></li>
     })
 
     var allRaritiesForSelected = this.state.rarityList.map((rarity, index) => {
-      return <a href={urlLinkList[index]} key={urlLinkList[index] + index}><li key={rarity + index}>{rarity}</li></a>
+      return <li key={rarity + index}><a href={urlLinkList[index]} key={urlLinkList[index] + index}>{rarity}</a></li>
     })
 
     var allUrlsForSelected = this.state.urlList.map((url, index) => {
-      return <a href={url} key={url + index}><li key={url + index}>{url}</li></a>
+      return <li key={url + index}><a href={url} key={url + index}>{url}</a></li>
     })
 
     return (

@@ -66,11 +66,11 @@ export default class SetData extends React.Component {
     })
 
     var allCardsForSelected = this.state.cardNameList.map((card, index) => {
-      return <a href={urlLinkList[index]} key={urlLinkList[index] + index}><li key={card + index}>{card}</li></a>
+      return <li key={card + index}><a href={urlLinkList[index]} key={urlLinkList[index] + index}>{card}</a></li>
     })
 
     var allUrlsForSelected = this.state.urlList.map((url, index) => {
-      return <a href={url} key={url + index}><li key={url + index}>{url}</li></a>
+      return <li key={url + index}><a href={url} key={url + index}>{url}</a></li>
     })
 
     return (
