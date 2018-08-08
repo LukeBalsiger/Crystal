@@ -13,6 +13,7 @@ export default class SetData extends React.Component {
         showDataToCopy: false,
         value: "base1",
         cardNameList: ["Please Wait..."],
+        setNumList: [],
         urlList: []
     }
 
@@ -24,16 +25,23 @@ export default class SetData extends React.Component {
   componentDidMount() {
     pokemontcgsdk.card.where({setCode: this.state.value})
         .then(result =>  {
+            result.sort(function(a, b) {
+                return a.number - b.number;
+              });
             var listCards = []
             var listUrls = []
+            var listNums = []
             for(var i = 0; i < result.length; i++) {
                 if(result[i].name.length === 0) { result[i].set = 'N/A'}
+                if(result[i].number.length === 0) { result[i].number = 'N/A'}
                 if(result[i].imageUrl.length === 0) { result[i].imageUrl = 'N/A'}
                 listCards.push(result[i].name)
+                listNums.push(result[i].number)
                 listUrls.push(result[i].imageUrl)
             }
             this.setState({
                 cardNameList: listCards,
+                setNumList: listNums,
                 urlList: listUrls
             })
     });
@@ -52,17 +60,24 @@ export default class SetData extends React.Component {
     var selectedSetTranslated = helper.getSetCode(selectedSet)
     pokemontcgsdk.card.where({setCode: selectedSetTranslated})
         .then(result =>  {
+            result.sort(function(a, b) {
+                return a.number - b.number;
+              });
             var listCards = []
+            var listNums = []
             var listUrls = []
             for(var i = 0; i < result.length; i++) {
                 if(result[i].name.length === 0) { result[i].set = 'N/A'}
+                if(result[i].number.length === 0) { result[i].number = 'N/A'}
                 if(result[i].imageUrl.length === 0) { result[i].imageUrl = 'N/A'}
                 listCards.push(result[i].name)
+                listNums.push(result[i].number)
                 listUrls.push(result[i].imageUrl)
             }
             this.setState({
                 value: selectedSet,
                 cardNameList: listCards,
+                setNumList: listNums,
                 urlList: listUrls
             })
         })
@@ -76,10 +91,6 @@ export default class SetData extends React.Component {
         return <option key={set} value={`${set}`}>{set}</option>
     })
 
-    var urlLinkList = this.state.urlList.map(url => {
-        return url
-    })
-
     var allCardsForSelected = this.state.cardNameList.map((card, index) => {
       return <li key={card + index}>{card}</li>
     })
@@ -88,24 +99,30 @@ export default class SetData extends React.Component {
       return <li key={url + index}>{url}</li>
     })
 
+    var allNumsForSelected = this.state.setNumList.map((num, index) => {
+        return <li key={num + index}>{num}</li>
+      })
+
     var tableRowsData = () => {
         var multiArray = new Array(this.state.cardNameList.length);
         for (var i = 0; i < this.state.cardNameList.length; i++) {
-          multiArray[i] = new Array(2);
+          multiArray[i] = new Array(3);
         }
         for(var j = 0; j < this.state.cardNameList.length; j++) {
           multiArray[j][0] = this.state.cardNameList[j]
-          multiArray[j][1] = this.state.urlList[j]
+          multiArray[j][1] = this.state.setNumList[j]
+          multiArray[j][2] = this.state.urlList[j]
         }
         return multiArray
       }
   
       var tableRows = tableRowsData().map((tableRow, index) => {
-          var imageColumn = <td className="SetData-table-data"><a href={tableRow[1]} key={tableRow[1] + index}>Link</a></td>
-          if(this.state.showImage) { imageColumn = <td className="SetData-table-data"><img src={tableRow[1]} alt="Card"/></td> }
+          var imageColumn = <td className="SetData-table-data"><a href={tableRow[2]} key={tableRow[2] + index}>Link</a></td>
+          if(this.state.showImage) { imageColumn = <td className="SetData-table-data"><img src={tableRow[2]} alt="Card"/></td> }
           return (
             <tr key={index} className="SetData-table-row">
               <td className="SetData-table-data">{tableRow[0]}</td>
+              <td className="SetData-table-data">{tableRow[1]}</td>
               {imageColumn}
               </tr>
           )
@@ -116,16 +133,22 @@ export default class SetData extends React.Component {
           return (
             <div className="SetData-display-block">
                 <div className="SetData-card-list-display">
-                <h4 className="SetData-h4">Set has these cards:</h4>
-                <ul className="SetData-ul">
-                    {allCardsForSelected}
-                </ul>
+                    <h4 className="SetData-h4">Set has these cards:</h4>
+                    <ul className="SetData-ul">
+                        {allCardsForSelected}
+                    </ul>
+                </div>
+                <div className="SetData-set-number-display">
+                    <h4 className="SetData-h4">Set Numbers:</h4>
+                    <ul className="SetData-ul">
+                        {allNumsForSelected}
+                    </ul>
                 </div>
                 <div className="SetData-url-list-display">
-                <h4 className="SetData-h4">Image urls:</h4>
-                <ul className="SetData-ul">
-                    {allUrlsForSelected}
-                </ul>
+                    <h4 className="SetData-h4">Image urls:</h4>
+                    <ul className="SetData-ul">
+                        {allUrlsForSelected}
+                    </ul>
                 </div>
             </div>
           )
@@ -150,11 +173,13 @@ export default class SetData extends React.Component {
                 <label>Show more data</label>
                 </form>
             </div>
+            <br />
             <div className="SetData-table-display">
                 <table className="SetData-table">
                 <thead className="SetData-table-head">
                     <tr className="SetData-table-row">
                     <th className="SetData-table-head-column">Card</th>
+                    <th className="SetData-table-head-column">Number</th>
                     <th className="SetData-table-head-column">Image</th>
                     </tr>
                 </thead>

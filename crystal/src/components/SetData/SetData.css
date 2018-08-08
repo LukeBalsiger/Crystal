@@ -11,6 +11,11 @@
     background-color: dimgray;
 }
 
+.SetData-set-number-display {
+    color: black;
+    background-color: dimgray;
+}
+
 .SetData-url-list-display {
     color: black;
     background-color: dimgray;
@@ -22,4 +27,10 @@
     width: 90%;
     color: black;
     background-color: darkslategrey;
+}
+
+.SetData-table {
+    width: 50%;
+    margin-left: 25%;
+    background-color: rgb(53, 53, 53)
 }

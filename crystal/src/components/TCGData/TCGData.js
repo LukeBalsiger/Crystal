@@ -182,8 +182,11 @@ export default class TCGData extends React.Component {
                   {cmbxItems}
               </select>
               <br />
-              <input type="checkbox" value={this.state.showImage} onChange={this.handleImageCheck}/>
-              <label>Show images</label>
+              <label class="switch">
+                <input type="checkbox" value={this.state.showImage} onChange={this.handleImageCheck}/>
+                <span class="slider round"></span>
+                Show Images
+              </label>
               <input type="checkbox" value={this.state.showDataToCopy} onChange={this.handleDataCheck}/>
               <label>Show more data</label>
             </form>
