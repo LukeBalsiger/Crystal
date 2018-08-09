@@ -2,8 +2,7 @@ import React from 'react'
 import CrystalNavbar from './../Nav/Nav'
 import './SetData.css'
 import data from './../../data/UIData'
-import pokemontcgsdk from 'pokemontcgsdk'
-import helper from './SetDataHelper'
+import sets from './../../data/sets/setHelper'
 
 export default class SetData extends React.Component {
   constructor(props) {
@@ -23,28 +22,28 @@ export default class SetData extends React.Component {
   }
 
   componentDidMount() {
-    pokemontcgsdk.card.where({setCode: this.state.value})
-        .then(result =>  {
-            result.sort(function(a, b) {
-                return a.number - b.number;
-              });
-            var listCards = []
-            var listUrls = []
-            var listNums = []
-            for(var i = 0; i < result.length; i++) {
-                if(result[i].name.length === 0) { result[i].set = 'N/A'}
-                if(result[i].number.length === 0) { result[i].number = 'N/A'}
-                if(result[i].imageUrl.length === 0) { result[i].imageUrl = 'N/A'}
-                listCards.push(result[i].name)
-                listNums.push(result[i].number)
-                listUrls.push(result[i].imageUrl)
-            }
-            this.setState({
-                cardNameList: listCards,
-                setNumList: listNums,
-                urlList: listUrls
-            })
-    });
+    var selectedSet = "Base Set"
+    var listCards = []
+    var listNums = []
+    var listUrls = []
+    var result = sets.importSet(selectedSet)
+    for(var i = 0; i < result.length; i++) {
+        if(result[i].name.length === 0) { result[i].set = 'N/A'}
+        if(result[i].number.length === 0) { result[i].number = 'N/A'}
+        if(result[i].imageUrl.length === 0) { result[i].imageUrl = 'N/A'}
+        listCards.push(result[i].name)
+        listNums.push(result[i].number)
+        listUrls.push(result[i].imageUrl)
+    }
+    this.setState({
+        value: selectedSet,
+        cardNameList: listCards,
+        setNumList: listNums,
+        urlList: listUrls
+    })
+
+
+    
   }
 
   handleImageCheck(event) {
@@ -57,30 +56,24 @@ export default class SetData extends React.Component {
 
   handleChange(event) {
     var selectedSet = event.target.value
-    var selectedSetTranslated = helper.getSetCode(selectedSet)
-    pokemontcgsdk.card.where({setCode: selectedSetTranslated})
-        .then(result =>  {
-            result.sort(function(a, b) {
-                return a.number - b.number;
-              });
-            var listCards = []
-            var listNums = []
-            var listUrls = []
-            for(var i = 0; i < result.length; i++) {
-                if(result[i].name.length === 0) { result[i].set = 'N/A'}
-                if(result[i].number.length === 0) { result[i].number = 'N/A'}
-                if(result[i].imageUrl.length === 0) { result[i].imageUrl = 'N/A'}
-                listCards.push(result[i].name)
-                listNums.push(result[i].number)
-                listUrls.push(result[i].imageUrl)
-            }
-            this.setState({
-                value: selectedSet,
-                cardNameList: listCards,
-                setNumList: listNums,
-                urlList: listUrls
-            })
-        })
+    var listCards = []
+    var listNums = []
+    var listUrls = []
+    var result = sets.importSet(selectedSet)
+    for(var i = 0; i < result.length; i++) {
+        if(result[i].name.length === 0) { result[i].set = 'N/A'}
+        if(result[i].number.length === 0) { result[i].number = 'N/A'}
+        if(result[i].imageUrl.length === 0) { result[i].imageUrl = 'N/A'}
+        listCards.push(result[i].name)
+        listNums.push(result[i].number)
+        listUrls.push(result[i].imageUrl)
+    }
+    this.setState({
+        value: selectedSet,
+        cardNameList: listCards,
+        setNumList: listNums,
+        urlList: listUrls
+    })
   }
 
   render() {
