@@ -10,7 +10,7 @@ export default class SetData extends React.Component {
     this.state = { 
         showImage: false,
         showDataToCopy: false,
-        value: "base1",
+        value: "",
         cardNameList: ["Please Wait..."],
         setNumList: [],
         urlList: []
