@@ -1,8 +1,8 @@
 import React from 'react'
-import CrystalNavbar from './../Nav/Nav'
-import './SetData.css'
+import CrystalNavbar from '../Nav/Nav'
+import './Set.css'
 import data from './../../data/UIData'
-import sets from './../../data/sets/setHelper'
+import sets from '../../data/sets/setHelper'
 
 export default class SetData extends React.Component {
   constructor(props) {
@@ -167,23 +167,7 @@ export default class SetData extends React.Component {
                 </form>
             </div>
             <br />
-            <div className="SetData-table-display">
-                <table className="SetData-table">
-                <thead className="SetData-table-head">
-                    <tr className="SetData-table-row">
-                    <th className="SetData-table-head-column">Card</th>
-                    <th className="SetData-table-head-column">Number</th>
-                    <th className="SetData-table-head-column">Image</th>
-                    </tr>
-                </thead>
-                <tbody className="SetData-table-body">
-                    {tableRows}
-                </tbody>
-                </table>
-            </div>
-            <div>
-                {dataToCopyBlock()}
-            </div>
+            
         </div>
       </div>
     )
