@@ -1,8 +1,8 @@
 import React from 'react'
-import CrystalNavbar from './../Nav/Nav'
+//import CrystalNavbar from '../Nav/Nav'
 import './Update.css'
-import data from './../../data/UIData'
-import sets from './../../data/sets/setHelper'
+//import data from './../../data/UIData'
+import sets from '../../data/sets/setHelper'
 import axios from 'axios'
 
 export default class Update extends React.Component {
@@ -18,7 +18,6 @@ export default class Update extends React.Component {
 
   componentDidMount() {
     var selectedSet = "Base Set"
-    var result = sets.importSet(selectedSet)
     this.setState({
         value: selectedSet
     })
@@ -26,7 +25,6 @@ export default class Update extends React.Component {
 
   handleChange(event) {
     var selectedSet = event.target.value
-    var result = sets.importSet(selectedSet)
     this.setState({
         value: selectedSet
     })
@@ -59,7 +57,7 @@ export default class Update extends React.Component {
 
   render() {
     
-    var cmbxItems = data.sets.map((set) => {
+    /*var cmbxItems = data.sets.map((set) => {
         if(set === "Base") {
             return <option key={set} selected value={`${set}`}>{set}</option>
         }
@@ -77,6 +75,7 @@ export default class Update extends React.Component {
         <br />
         <button className="button" onClick={this.handleClick}/>
       </div>
-    )
+    )*/
+      return
   }
 }

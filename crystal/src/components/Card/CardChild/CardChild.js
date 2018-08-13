@@ -1,23 +1,24 @@
 import React from 'react'
 import axios from 'axios'
-import './TestChild.css'
-import sets from './../Set/SetHelper'
+import './CardChild.css'
 
-export default class TestChild extends React.Component {
+export default class CardChild extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            set: this.props.set,
+            pokemon: this.props.pokemon,
             asyncData: null,
             showImage: this.props.showImage
         }
     }
 
     componentWillReceiveProps(nextProps) {
-        var setCode = sets.getSetCode(nextProps.set)
-        axios.get('http://localhost:8000/api/cards?setCode=' + setCode).then(response => {
+        console.log(nextProps.pokemon)
+        var pokemon  = nextProps.pokemon.charAt(0).toUpperCase() + nextProps.pokemon.substr(1);
+        console.log(pokemon)
+        axios.get('http://localhost:8000/api/cards?name=' + pokemon).then(response => {
             this.setState({
-                set: nextProps.set,
+                pokemon: nextProps.pokemon,
                 asyncData: response.data,
                 showImage: nextProps.showImage
             })
@@ -25,8 +26,7 @@ export default class TestChild extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:8000/api/cards?setCode=base1').then(response => {
-            console.log(response.data)
+        axios.get('http://localhost:8000/api/cards?name=Bulbasaur').then(response => {
             this.setState({
                 asyncData: response.data
             })
@@ -59,14 +59,14 @@ export default class TestChild extends React.Component {
                             var imageColumn = <td className="TCGData-table-data"><a href={data.imageUrl} key={data.imageUrl + index}>Link</a></td>
                             if(this.state.showImage) { imageColumn = <td className="TCGData-table-data"><img src={data.imageUrl} alt="Card"/></td> }                    
                             var ownedColumn = <td className="TCGData-table-data">No</td>
-                            if(data.owned == true) { ownedColumn = <td className="TCGData-table-data">Yes</td>}
+                            if(data.owned === true) { ownedColumn = <td className="TCGData-table-data">Yes</td>}
                             var locationColumn = <td className="TCGData-table-data">N/A</td>
                             if(data.location) { locationColumn = <td className="TCGData-table-data">{data.location}</td> }
                             var notesColumn = <td className="TCGData-table-data">N/A</td>
                             if(data.notes) { notesColumn = <td className="TCGData-table-data">{data.notes}</td> }
                             return(
                                 <tr key={index} className="TCGData-table-row">
-                                    <td className="TCGData-table-data">{data.name}</td>
+                                    <td className="TCGData-table-data"><a href={"/edit/" + data.cardId}>{data.name}</a></td>
                                     <td className="TCGData-table-data">{data.number}</td>
                                     <td className="TCGData-table-data">{data.rarity}</td>
                                     {imageColumn}
@@ -79,20 +79,6 @@ export default class TestChild extends React.Component {
                         </tbody>
                     </table>
                 </div>
-
-
-
-
-
-/*
-                <ul>
-                    {asyncData.map(data =>
-                        <li key={data.name}>
-                        <a href={data.imageUrl}>{data.owned.toString()}</a>
-                        </li>
-                    )}
-                </ul>
-                */
             )
         }
     }

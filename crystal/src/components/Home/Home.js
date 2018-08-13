@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './Home.css'
-import CrystalNavbar from './../Nav/Nav'
+import CrystalNavbar from '../Nav/Nav'
 
 
 export default class Home extends Component {

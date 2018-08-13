@@ -1,8 +1,8 @@
 import React from 'react'
-import CrystalNavbar from '../Nav/Nav'
-import TestChild from '../TestChild/TestChild'
-import './TestParent.css'
-import data from './../../data/UIData'
+import CrystalNavbar from './../../Nav/Nav'
+import SetChild from './../SetChild/SetChild'
+import './SetParent.css'
+import data from './../../../data/UIData'
 
 export default class TestParent extends React.Component {
     constructor(props) {
@@ -52,7 +52,7 @@ export default class TestParent extends React.Component {
                     </form>
                 </div>
                 <br />
-                <TestChild set={this.state.set} showImage={this.state.showImage}/>
+                <SetChild set={this.state.set} showImage={this.state.showImage}/>
             </div>
         )
     }
