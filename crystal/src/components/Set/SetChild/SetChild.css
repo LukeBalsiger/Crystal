@@ -1,0 +1,26 @@
+.SetData-table {
+    background-color: rgb(58, 58, 58);
+}
+
+.SetData-table a:link, a:visited {
+    background-color: darkslategray;
+    color: black;
+    padding: 5px 5px;
+    text-align: center; 
+    text-decoration: none;
+    display: inline-block;
+}
+
+.SetData-table a:hover, a:active {
+    background-color: darkslateblue;
+}
+
+.SetData-table table, th, td {
+    border: 1px solid black;
+    text-align: center;
+    padding: 5px;
+}
+
+.SetData-table {
+    border-collapse: collapse;
+}

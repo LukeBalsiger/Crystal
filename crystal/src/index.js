@@ -14,7 +14,7 @@ ReactDOM.render(
     <BrowserRouter>
         <React.Fragment>
             <Route exact path="/" component={Home}/>
-            <Route path="/sets" component={SetParent}/>
+            <Route path="/sets/:id" component={SetParent}/>
             <Route path="/update" component={Update}/>
             <Route path="/cards" component={CardParent}/>
             <Route path="/edit/:id" component={Edit}/> 

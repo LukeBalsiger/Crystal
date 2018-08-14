@@ -4,11 +4,11 @@ import SetChild from './../SetChild/SetChild'
 import './SetParent.css'
 import data from './../../../data/UIData'
 
-export default class TestParent extends React.Component {
+export default class SetParent extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            set: "Base Set",
+            set: this.props.match.params.id,
             showImage: false
         }
 
@@ -23,16 +23,15 @@ export default class TestParent extends React.Component {
     }
 
     handleChange(event) {
+        var newSet = event.target.value
+        this.props.history.push('/sets/' + newSet)
         this.setState({
-            set: event.target.value
+            set:newSet
         })
     }
 
     render() {
         var cmbxItems = data.sets.map((set) => {
-            if(set === "Base") {
-                return <option key={set} selected value={`${set}`}>{set}</option>
-            }
             return <option key={set} value={`${set}`}>{set}</option>
         })
 
@@ -43,7 +42,7 @@ export default class TestParent extends React.Component {
                 <div className="SetData-form-block">
                     <form>
                         <label>Select the Set you wish to see card information for:   </label>
-                        <select className="SetData-select" value={this.state.set} onChange={this.handleChange}>
+                        <select className="SetData-select" defaultValue={this.state.set} onChange={this.handleChange}>
                             {cmbxItems}
                         </select>
                         <br />

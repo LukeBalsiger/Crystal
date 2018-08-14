@@ -1,0 +1,18 @@
+.button {
+    text-align: center;
+    width: 45px;
+    height: 25px;
+}
+
+.EditForm { 
+    margin: 30px;
+    margin-left: 50%;
+    background-color: rgb(58, 58, 58);
+}
+
+.EditImage {
+    float: left;
+    margin-left: 30px;
+    padding: 20px;
+    margin-right: 30px;
+}

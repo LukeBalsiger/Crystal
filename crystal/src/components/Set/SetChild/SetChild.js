@@ -3,7 +3,7 @@ import axios from 'axios'
 import './SetChild.css'
 import sets from './../SetHelper'
 
-export default class TestChild extends React.Component {
+export default class SetChild extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -25,8 +25,8 @@ export default class TestChild extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:8000/api/cards?setCode=base1').then(response => {
-            console.log(response.data)
+        var setCode = sets.getSetCode(this.state.set)
+        axios.get('http://localhost:8000/api/cards?setCode=' + setCode).then(response => {
             this.setState({
                 asyncData: response.data
             })
@@ -42,33 +42,33 @@ export default class TestChild extends React.Component {
         else {
             return (
                 <div>
-                    <table className="TCGData-table">
-                        <thead className="TCGData-table-head">
-                            <tr className="TCGData-table-row">
-                                <th className="TCGData-table-head-column">Name</th>
-                                <th className="TCGData-table-head-column">Number</th> 
-                                <th className="TCGData-table-head-column">Rarity</th>
-                                <th className="TCGData-table-head-column">Image</th>
-                                <th className="TCGData-table-head-column">Owned</th>
-                                <th className="TCGData-table-head-column">Location</th>
-                                <th className="TCGData-table-head-column">Notes</th>
+                    <table className="SetData-table">
+                        <thead className="SetData-table-head">
+                            <tr className="SetData-table-row">
+                                <th className="SetData-table-head-column">Name</th>
+                                <th className="SetData-table-head-column">Number</th> 
+                                <th className="SetData-table-head-column">Rarity</th>
+                                <th className="SetData-table-head-column">Image</th>
+                                <th className="SetData-table-head-column">Owned</th>
+                                <th className="SetData-table-head-column">Location</th>
+                                <th className="SetData-table-head-column">Notes</th>
                             </tr>
                         </thead>
-                        <tbody className="TCGData-table-body">
+                        <tbody className="SetData-table-body">
                         {asyncData.map((data, index) => {
-                            var imageColumn = <td className="TCGData-table-data"><a href={data.imageUrl} key={data.imageUrl + index}>Link</a></td>
-                            if(this.state.showImage) { imageColumn = <td className="TCGData-table-data"><img src={data.imageUrl} alt="Card"/></td> }                    
-                            var ownedColumn = <td className="TCGData-table-data">No</td>
-                            if(data.owned === true) { ownedColumn = <td className="TCGData-table-data">Yes</td>}
-                            var locationColumn = <td className="TCGData-table-data">N/A</td>
-                            if(data.location) { locationColumn = <td className="TCGData-table-data">{data.location}</td> }
-                            var notesColumn = <td className="TCGData-table-data">N/A</td>
-                            if(data.notes) { notesColumn = <td className="TCGData-table-data">{data.notes}</td> }
+                            var imageColumn = <td className="SetData-table-data"><a href={data.imageUrl} key={data.imageUrl + index}>Link</a></td>
+                            if(this.state.showImage) { imageColumn = <td className="SetData-table-data"><img src={data.imageUrl} alt="Card"/></td> }                    
+                            var ownedColumn = <td className="SetData-table-data">No</td>
+                            if(data.owned === true) { ownedColumn = <td className="SetData-table-data">Yes</td>}
+                            var locationColumn = <td className="SetData-table-data">N/A</td>
+                            if(data.location) { locationColumn = <td className="SetData-table-data">{data.location}</td> }
+                            var notesColumn = <td className="SetData-table-data">N/A</td>
+                            if(data.notes) { notesColumn = <td className="SetData-table-data">{data.notes}</td> }
                             return(
-                                <tr key={index} className="TCGData-table-row">
-                                    <td className="TCGData-table-data">{data.name}</td>
-                                    <td className="TCGData-table-data">{data.number}</td>
-                                    <td className="TCGData-table-data">{data.rarity}</td>
+                                <tr key={index} className="SetData-table-row">
+                                    <td className="SetData-table-data"><a href={"/edit/" + data.cardId}>{data.name}</a></td>
+                                    <td className="SetData-table-data">{data.number}</td>
+                                    <td className="SetData-table-data">{data.rarity}</td>
                                     {imageColumn}
                                     {ownedColumn}
                                     {locationColumn}
