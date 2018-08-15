@@ -21,7 +21,7 @@ export default class Edit extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:8000/api/cards?cardId=' + this.state.id).then(response => {
+        axios.get('http://localhost:4030/api/cards?cardId=' + this.state.id).then(response => {
             this.setState({
                 asyncData: response.data[0],
                 owned: response.data[0].owned,
@@ -51,7 +51,7 @@ export default class Edit extends React.Component {
 
     handleSave() {
         axios.patch(
-            "http://localhost:8000/api/cards/" + this.state.id,
+            "http://localhost:4030/api/cards/" + this.state.id,
             {
                 cardId: this.state.id,
                 owned: this.state.owned,

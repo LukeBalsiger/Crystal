@@ -35,7 +35,7 @@ export default class Update extends React.Component {
         var result = sets.importSet(selectedSet)
         for(var i = 0; i < result.length; i++) {
             axios.post(
-                "http://localhost:8000/api/cards",
+                "http://localhost:4030/api/cards",
                 {
                     cardId: result[i].id,
                     name: result[i].name,
