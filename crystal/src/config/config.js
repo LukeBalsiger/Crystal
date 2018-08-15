@@ -1,3 +1,3 @@
 module.exports = {
-    serverPort = 4030
+    serverPort: 4030
 }
