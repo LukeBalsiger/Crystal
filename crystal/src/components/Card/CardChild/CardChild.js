@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import './CardChild.css'
+import serverPort from './../../../config/config'
 
 export default class CardChild extends React.Component {
     constructor(props) {
@@ -16,7 +17,7 @@ export default class CardChild extends React.Component {
         console.log(nextProps.pokemon)
         var pokemon  = nextProps.pokemon.charAt(0).toUpperCase() + nextProps.pokemon.substr(1);
         console.log(pokemon)
-        axios.get('http://localhost:4030/api/cards?name=' + pokemon).then(response => {
+        axios.get('http://localhost:' + serverPort + '/api/cards?name=' + pokemon).then(response => {
             this.setState({
                 pokemon: nextProps.pokemon,
                 asyncData: response.data,
@@ -26,7 +27,7 @@ export default class CardChild extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4030/api/cards?name=Bulbasaur').then(response => {
+        axios.get('http://localhost:' + serverPort + '/api/cards?name=Bulbasaur').then(response => {
             this.setState({
                 asyncData: response.data
             })

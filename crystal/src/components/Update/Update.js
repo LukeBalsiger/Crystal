@@ -4,6 +4,7 @@ import './Update.css'
 import data from './../../data/UIData'
 import sets from '../../data/sets/setHelper'
 import axios from 'axios'
+import serverPort from './../../config/config'
 
 export default class Update extends React.Component {
   constructor(props) {
@@ -35,7 +36,7 @@ export default class Update extends React.Component {
         var result = sets.importSet(selectedSet)
         for(var i = 0; i < result.length; i++) {
             axios.post(
-                "http://localhost:4030/api/cards",
+                "http://localhost:" + serverPort + "/api/cards",
                 {
                     cardId: result[i].id,
                     name: result[i].name,

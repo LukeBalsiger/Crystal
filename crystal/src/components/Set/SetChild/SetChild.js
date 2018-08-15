@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import './SetChild.css'
 import sets from './../SetHelper'
+import serverPort from './../../../config/config'
 
 export default class SetChild extends React.Component {
     constructor(props) {
@@ -15,7 +16,7 @@ export default class SetChild extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         var setCode = sets.getSetCode(nextProps.set)
-        axios.get('http://localhost:4030/api/cards?setCode=' + setCode).then(response => {
+        axios.get('http://localhost:' + serverPort + '/api/cards?setCode=' + setCode).then(response => {
             this.setState({
                 set: nextProps.set,
                 asyncData: response.data,
@@ -26,7 +27,7 @@ export default class SetChild extends React.Component {
 
     componentDidMount() {
         var setCode = sets.getSetCode(this.state.set)
-        axios.get('http://localhost:4030/api/cards?setCode=' + setCode).then(response => {
+        axios.get('http://localhost:' + serverPort + '/api/cards?setCode=' + setCode).then(response => {
             this.setState({
                 asyncData: response.data
             })

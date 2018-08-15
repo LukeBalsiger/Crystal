@@ -2,6 +2,7 @@ import React from 'react'
 import CrystalNavbar from '../Nav/Nav'
 import './Edit.css'
 import axios from 'axios'
+import serverPort from './../../config/config'
 
 export default class Edit extends React.Component {
     constructor(props) {
@@ -21,7 +22,7 @@ export default class Edit extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4030/api/cards?cardId=' + this.state.id).then(response => {
+        axios.get('http://localhost:' + serverPort + '/api/cards?cardId=' + this.state.id).then(response => {
             this.setState({
                 asyncData: response.data[0],
                 owned: response.data[0].owned,
@@ -51,7 +52,7 @@ export default class Edit extends React.Component {
 
     handleSave() {
         axios.patch(
-            "http://localhost:4030/api/cards/" + this.state.id,
+            "http://localhost:" + serverPort + "/api/cards/" + this.state.id,
             {
                 cardId: this.state.id,
                 owned: this.state.owned,
