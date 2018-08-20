@@ -69,6 +69,16 @@ export default class Edit extends React.Component {
 
     render() {
         const { asyncData } = this.state
+        const storageLocations = [
+            "Main Binder 1",
+            "Main Binder 2",
+            "Main Binder 3",
+            "Box 1",
+            "Box 2"
+        ]
+        var cmbxItems = storageLocations.map((location) => {
+            return <option key={location} value={`${location}`}>{location}</option>
+        })
 
         if(asyncData === null) {
             return(<p>Loading...</p>)
@@ -92,8 +102,10 @@ export default class Edit extends React.Component {
                         <br />
                         <br />
                         <label>
-                            Location: 
-                            <input type="text" defaultValue={asyncData.location} onChange={this.handleLocationChange}/>
+                            Location:  
+                            <select value={asyncData.location} onChange={this.handleLocationChange}>
+                            {cmbxItems}
+                            </select>
                         </label>
                         <br />
                         <br />
