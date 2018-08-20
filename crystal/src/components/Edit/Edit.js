@@ -2,7 +2,8 @@ import React from 'react'
 import CrystalNavbar from '../Nav/Nav'
 import './Edit.css'
 import axios from 'axios'
-import config from './../../config/config'
+import config from '../../config/config'
+import Select from 'react-select';
 
 export default class Edit extends React.Component {
     constructor(props) {
@@ -12,7 +13,7 @@ export default class Edit extends React.Component {
             asyncData: null,
             owned: false,
             location: '',
-            notes: ''
+            notes: '',
         }
 
         this.handleOwnedChange = this.handleOwnedChange.bind(this);
@@ -46,7 +47,7 @@ export default class Edit extends React.Component {
 
     handleNotesChange(event) {
         this.setState({
-            notes: event.target.value
+            location: event.target.value
         })
     }
 
@@ -62,6 +63,7 @@ export default class Edit extends React.Component {
             { headers: { "content-type": "application/json" } }
         ).then((response) => {
             console.log(response)
+            alert("Saved!")
         }).catch(function (error) {
             console.log(error)
         })
@@ -69,16 +71,6 @@ export default class Edit extends React.Component {
 
     render() {
         const { asyncData } = this.state
-        const storageLocations = [
-            "Main Binder 1",
-            "Main Binder 2",
-            "Main Binder 3",
-            "Box 1",
-            "Box 2"
-        ]
-        var cmbxItems = storageLocations.map((location) => {
-            return <option key={location} value={`${location}`}>{location}</option>
-        })
 
         if(asyncData === null) {
             return(<p>Loading...</p>)
@@ -101,12 +93,12 @@ export default class Edit extends React.Component {
                         </label>
                         <br />
                         <br />
-                        <label>
-                            Location:  
-                            <select value={asyncData.location} onChange={this.handleLocationChange}>
-                            {cmbxItems}
-                            </select>
-                        </label>
+                        <label>Location: </label>
+                        <select defaultValue={asyncData.location} onChange={this.handleLocationChange}>
+                            {config.locations.map(loc => {
+                                return <option key={loc} value={loc}>{loc}</option>
+                            })}
+                        </select>
                         <br />
                         <br />
                         <label>
