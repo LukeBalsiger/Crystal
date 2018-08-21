@@ -40,10 +40,10 @@ export default class CardParent extends React.Component {
             <div>
                 <CrystalNavbar />
                 <br />
-                <div className="SetData-form-block">
+                <div className="CardData-form-block">
                     <form>
                         <label>Select the pokemon you wish to see card information for:   </label>
-                        <select className="SetData-select" value={this.state.pokemon} onChange={this.handleChange}>
+                        <select className="CardData-select" value={this.state.pokemon} onChange={this.handleChange}>
                             {cmbxItems}
                         </select>
                         <br />

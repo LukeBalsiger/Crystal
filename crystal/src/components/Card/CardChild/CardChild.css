@@ -1,10 +1,10 @@
 .CardData-table {
-    background-color: rgb(58, 58, 58);
+    background-color: rgb(43, 43, 43);
 }
 
 .CardData-table a:link, a:visited {
-    background-color: darkslategray;
-    color: black;
+    background-color: rgb(43, 43, 43);
+    color: rgb(103, 211, 238);
     padding: 5px 5px;
     text-align: center; 
     text-decoration: none;
@@ -19,6 +19,7 @@
     border: 1px solid black;
     text-align: center;
     padding: 5px;
+    color: rgb(103, 211, 238);
 }
 
 .CardData-table {

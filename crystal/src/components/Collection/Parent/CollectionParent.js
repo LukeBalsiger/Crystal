@@ -8,7 +8,7 @@ export default class CollectionParent extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            filterLocation: "",
+            filterLocation: "Main Binder 1",
             showImage: false
         }
 
@@ -37,10 +37,10 @@ export default class CollectionParent extends React.Component {
             <div>
                 <CrystalNavbar />
                 <br />
-                <div className="SetData-form-block">
+                <div className="CollectionData-form-block">
                     <form>
                         <label>Select a storage location:   </label>
-                        <select className="SetData-select" value={this.state.filterLocation} onChange={this.handleChange}>
+                        <select className="CollectionData-select" value={this.state.filterLocation} onChange={this.handleChange}>
                             {cmbxItems}
                         </select>
                         <br />

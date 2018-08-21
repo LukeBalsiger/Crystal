@@ -1,0 +1,11 @@
+.CardData-select {
+    background-color: rgb(43, 43, 43);
+    color: rgb(103, 211, 238);
+}
+.CardData-form-block {
+    text-align: center;
+    margin-left: 5%;
+    width: 90%;
+    color: rgb(103, 211, 238);
+    background-color: rgb(43, 43, 43);
+}

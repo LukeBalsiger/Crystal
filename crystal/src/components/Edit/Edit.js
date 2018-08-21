@@ -3,7 +3,6 @@ import CrystalNavbar from '../Nav/Nav'
 import './Edit.css'
 import axios from 'axios'
 import config from '../../config/config'
-import Select from 'react-select';
 
 export default class Edit extends React.Component {
     constructor(props) {
